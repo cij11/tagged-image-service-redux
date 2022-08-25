@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-    tagged-image-service:
-        build: .
-        image: chrisjolly25/tagged-image-service:latest
-        ports:
-            - '3000:3000'
-        networks:
-            - back
+    # tagged-image-service:
+    #     build: .
+    #     image: chrisjolly25/tagged-image-service:latest
+    #     ports:
+    #         - '3000:3000'
+    #     networks:
+    #         - back
     db:
         image: mysql:8.0
         command: --default-authentication-plugin=mysql_native_password
