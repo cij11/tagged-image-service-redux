@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Tag } from 'src/entity/tag.entity';
-import { TagService } from 'src/service/tag.service';
+import { Tag } from 'src/tag/tag.entity';
+import { TagService } from './tag.service';
 
 @Controller('tags')
 export class TagController {
