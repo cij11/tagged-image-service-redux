@@ -4,9 +4,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { Tag } from './tag/tag.entity';
+import { Tag } from './entity/tag.entity';
+import { migrationDataSource } from './migration-data-source';
 import { TagModule } from './tag/tag.module';
 import { UserModule } from './user/user.module';
+
+console.log(
+  `Including migrationDataSource into build: ${!!migrationDataSource}`,
+);
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { Tag } from './tag.entity';
+import { Tag } from '../entity/tag.entity';
 
 @Injectable()
 export class TagRepository {
