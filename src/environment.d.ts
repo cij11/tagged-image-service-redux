@@ -3,7 +3,7 @@ declare global {
     interface ProcessEnv {
       MYSQL_HOST: string;
       MYSQL_HOST: string;
-      MYSQL_PORT: number;
+      MYSQL_PORT: string;
       MYSQL_DB: string;
       SERVICE_USER_PASSWORD: string;
       MYSQL_SERVICE_USERNAME: string;
