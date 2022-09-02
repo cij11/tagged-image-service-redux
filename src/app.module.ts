@@ -4,7 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { Image } from './entity/image.entity';
 import { Tag } from './entity/tag.entity';
+import { User } from './entity/user.entity';
 import { migrationDataSource } from './migration/migration-data-source';
 import { TagModule } from './tag/tag.module';
 import { UserModule } from './user/user.module';
@@ -27,7 +29,7 @@ console.log(
         username: configService.get('MYSQL_SERVICE_USERNAME'),
         password: configService.get('SERVICE_USER_PASSWORD'),
         database: configService.get('MYSQL_DB'),
-        entities: [Tag],
+        entities: [Tag, User, Image],
         synchronize: true,
       }),
       inject: [ConfigService],

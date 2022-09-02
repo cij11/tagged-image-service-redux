@@ -9,13 +9,15 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Request() req) {
+  async login(@Request() req: any) {
+    // TODO - Fix explicit any
     return this.authService.login(req.user); // user comes from local strategy validate()
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
+  getProfile(@Request() req: any) {
+    // TODO - Fix explicit any
     return req.user; // user comes from jwt strategy validate()
   }
 }

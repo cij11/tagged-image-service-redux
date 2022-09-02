@@ -1,19 +1,19 @@
 import * as bcrypt from 'bcrypt';
 import 'dotenv/config';
 import { MigrationInterface, QueryRunner } from 'typeorm';
+import { SALT_ROUNDS } from '../../auth/auth.constants';
 
 export class CreateClientUserChrisJolly1662086581411
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const saltRounds = 10;
     const clientUsername = process.env.CLIENT_USERNAME;
     const plainTextClientPassword = process.env.CLIENT_PASSWORD;
 
-    const hash = bcrypt.hashSync(plainTextClientPassword, saltRounds);
+    const hash = bcrypt.hashSync(plainTextClientPassword, SALT_ROUNDS);
 
     await queryRunner.query(
-      `INSERT INTO user 
+      `INSERT INTO user
       (id, username, password_bcrypt)
        values (default, "${clientUsername}", "${hash}") `,
     );
