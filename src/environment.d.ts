@@ -9,6 +9,9 @@ declare global {
       MYSQL_SERVICE_USERNAME: string;
 
       JWT_SECRET: string;
+
+      CLIENT_USERNAME: string;
+      CLIENT_PASSWORD: string;
     }
   }
 }

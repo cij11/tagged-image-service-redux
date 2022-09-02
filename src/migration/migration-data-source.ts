@@ -7,7 +7,7 @@ console.log('Starting migration');
 export const migrationDataSource = new DataSource({
   type: 'mysql',
   host: process.env.MYSQL_HOST,
-  port: process.env.MYSQL_PORT,
+  port: Number.parseInt(process.env.MYSQL_PORT),
   username: process.env.MYSQL_SERVICE_USERNAME,
   password: process.env.SERVICE_USER_PASSWORD,
   database: process.env.MYSQL_DB,
