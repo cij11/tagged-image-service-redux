@@ -6,7 +6,7 @@ import { User } from '../entity/user.entity'
 export class UserRepository {
     constructor(private dataSource: DataSource) {}
 
-    async findUser(username: string) {
+    async findUser(username: string): Promise<User | null> {
         const repo = this.dataSource.getRepository(User)
 
         return repo.findOneBy({

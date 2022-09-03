@@ -6,7 +6,7 @@ import { UserRepository } from './user.repository'
 export class UserService {
     constructor(private userRepository: UserRepository) {}
 
-    async findOne(username: string): Promise<User | null> {
+    async findUser(username: string): Promise<User> {
         return this.userRepository.findUser(username)
     }
 }
