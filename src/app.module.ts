@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { migrationDataSource } from '@src/migration/migration-data-source'
+import { TagModule } from '@src/tag/tag.module'
+import { UserModule } from '@src/user/user.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { Image } from './entity/image.entity'
 import { Tag } from './entity/tag.entity'
 import { User } from './entity/user.entity'
-import { migrationDataSource } from './migration/migration-data-source'
-import { TagModule } from './tag/tag.module'
-import { UserModule } from './user/user.module'
 
 console.log(
     `Including migrationDataSource into build: ${!!migrationDataSource}`

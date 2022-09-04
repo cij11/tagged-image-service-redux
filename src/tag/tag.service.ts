@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { Tag } from '../entity/tag.entity'
-import { TagRepository } from './tag.repository'
+import { Tag } from '@src/entity/tag.entity'
+import { TagRepository } from '@src/tag/tag.repository'
 
 @Injectable()
 export class TagService {

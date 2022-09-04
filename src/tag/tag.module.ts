@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
-import { TagController } from './tag.controller'
-import { TagRepository } from './tag.repository'
-import { TagService } from './tag.service'
+import { TagController } from '@src/tag/tag.controller'
+import { TagRepository } from '@src/tag/tag.repository'
+import { TagService } from '@src/tag/tag.service'
 
 @Module({
     imports: [],
