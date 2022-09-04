@@ -1,13 +1,22 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
+import {
+    Controller,
+    Get,
+    Post,
+    Request,
+    UseGuards,
+    UseInterceptors
+} from '@nestjs/common'
 import { AuthService } from '@src/auth/auth.service'
 import { JwtAuthGuard } from '@src/auth/jwt-auth.guard'
 import { LocalAuthGuard } from '@src/auth/local-auth.guard'
+import { LoggingInterceptor } from '@src/logging/logging.interceptor'
 
 @Controller()
 export class AppController {
     constructor(private authService: AuthService) {}
 
     @UseGuards(LocalAuthGuard)
+    @UseInterceptors(LoggingInterceptor)
     @Post('auth/login')
     async login(@Request() req: any) {
         // TODO - Fix explicit any
@@ -15,6 +24,7 @@ export class AppController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @UseInterceptors(LoggingInterceptor)
     @Get('profile')
     getProfile(@Request() req: any) {
         // TODO - Fix explicit any
