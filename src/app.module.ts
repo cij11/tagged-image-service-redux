@@ -1,20 +1,18 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { APP_INTERCEPTOR } from '@nestjs/core'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { AppController } from '@src/app.controller'
+import { AppService } from '@src/app.service'
+import { AuditRepository } from '@src/audit/audit.repository'
+import { AuditService } from '@src/audit/audit.service'
+import { AuthModule } from '@src/auth/auth.module'
+import { Audit } from '@src/entity/audit.entity'
+import { Image } from '@src/entity/image.entity'
+import { Tag } from '@src/entity/tag.entity'
+import { User } from '@src/entity/user.entity'
 import { migrationDataSource } from '@src/migration/migration-data-source'
 import { TagModule } from '@src/tag/tag.module'
 import { UserModule } from '@src/user/user.module'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { AuditRepository } from './audit/audit.repository'
-import { AuditService } from './audit/audit.service'
-import { AuthModule } from './auth/auth.module'
-import { Audit } from './entity/audit.entity'
-import { Image } from './entity/image.entity'
-import { Tag } from './entity/tag.entity'
-import { User } from './entity/user.entity'
-import { AuditInterceptor } from './logging/audit.interceptor'
 
 console.log(
     `Including migrationDataSource into build: ${!!migrationDataSource}`
@@ -45,12 +43,8 @@ console.log(
     controllers: [AppController],
     providers: [
         AppService,
-        AuditService,
-        AuditRepository,
-        {
-            provide: APP_INTERCEPTOR,
-            useClass: AuditInterceptor
-        }
+        AuditService, // Include AuditService at app module level to be available to AuditInterceptor
+        AuditRepository // Include AuditRepository at app module level to be available to AuditInterceptor
     ]
 })
 export class AppModule {}
