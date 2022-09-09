@@ -9,22 +9,22 @@ import {
 import { AuthService } from '@src/auth/auth.service'
 import { JwtAuthGuard } from '@src/auth/jwt-auth.guard'
 import { LocalAuthGuard } from '@src/auth/local-auth.guard'
-import { LoggingInterceptor } from '@src/logging/logging.interceptor'
+import { AuditInterceptor } from './logging/audit.interceptor'
 
 @Controller()
 export class AppController {
     constructor(private authService: AuthService) {}
 
     @UseGuards(LocalAuthGuard)
-    @UseInterceptors(LoggingInterceptor)
     @Post('auth/login')
+    // Do not audit or log the body of this call. Contains user credentials
     async login(@Request() req: any) {
         // TODO - Fix explicit any
         return this.authService.login(req.user) // user comes from local strategy validate()
     }
 
     @UseGuards(JwtAuthGuard)
-    @UseInterceptors(LoggingInterceptor)
+    @UseInterceptors(AuditInterceptor)
     @Get('profile')
     getProfile(@Request() req: any) {
         // TODO - Fix explicit any
