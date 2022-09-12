@@ -6,10 +6,6 @@ import { AuditRepository } from './audit.repository'
 export class AuditService {
     constructor(private auditRepository: AuditRepository) {}
 
-    test() {
-        console.log('audit service test hit')
-    }
-
     async create(audit: Audit) {
         return this.auditRepository.createAudit(audit)
     }

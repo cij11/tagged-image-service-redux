@@ -1,6 +1,6 @@
+import { AuthService } from '@src/auth/auth.service'
+import { LocalStrategy } from '@src/auth/local.strategy'
 import * as sinon from 'sinon'
-import { AuthService } from '../../../src/auth/auth.service'
-import { LocalStrategy } from '../../../src/auth/local.strategy'
 
 describe('LocalStrategy.validate', () => {
     it('should return an AuthenticatedUser, if authService returns a valid user', async () => {

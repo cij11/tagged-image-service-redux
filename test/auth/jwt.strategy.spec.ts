@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config'
+import { JwtStrategy } from '@src/auth/jwt.strategy'
 import * as sinon from 'sinon'
-import { JwtStrategy } from '../../../src/auth/jwt.strategy'
 
 describe('JwtStrategy.validate', () => {
     it('should return an AuthenticatedUser, from a given payload', async () => {

@@ -1,8 +1,8 @@
 import { JwtService } from '@nestjs/jwt'
+import { AuthService } from '@src/auth/auth.service'
+import { User } from '@src/entity/user.entity'
+import { UserService } from '@src/user/user.service'
 import * as sinon from 'sinon'
-import { AuthService } from '../../../src/auth/auth.service'
-import { User } from '../../../src/entity/user.entity'
-import { UserService } from '../../../src/user/user.service'
 
 describe('AuthService.validateUser', () => {
     const repoUser: User = {
