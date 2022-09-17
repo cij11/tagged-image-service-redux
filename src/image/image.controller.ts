@@ -6,7 +6,6 @@ import {
     Param,
     Patch,
     Post,
-    Res,
     StreamableFile,
     UploadedFile,
     UseGuards,
@@ -18,7 +17,6 @@ import { Image } from '@src/entity/image.entity'
 import { ImageService } from '@src/image/image.service'
 import { AuditInterceptor } from '@src/logging/audit.interceptor'
 import { MimeType } from '@src/type/mime-type.type'
-import { createReadStream } from 'fs'
 
 @Controller('images')
 export class ImageController {
@@ -28,8 +26,7 @@ export class ImageController {
     @UseGuards(JwtAuthGuard)
     async findOne(
         @Param('id') id: string,
-        @Headers() headers: Record<string, string>,
-        @Res({ passthrough: true }) res: Response
+        @Headers() headers: Record<string, string>
     ): Promise<Image | StreamableFile> {
         try {
             const contentType = headers['content-type']
@@ -37,21 +34,14 @@ export class ImageController {
             switch (contentType) {
                 case MimeType.ApplicationJson: {
                     console.log('Content-type application/json requested')
-                    const imageModel = this.imageService.getImageModel(
-                        Number.parseInt(id)
-                    )
-
-                    return imageModel
+                    return this.imageService.getImageModel(Number.parseInt(id))
                 }
                 case MimeType.Image: {
                     console.log('Content-Type image requested')
 
-                    const path = await this.imageService.getImageFilePath(
+                    return this.imageService.getImageStreamableFile(
                         Number.parseInt(id)
                     )
-
-                    const imageFile = createReadStream(path)
-                    return new StreamableFile(imageFile)
                 }
                 default: {
                     throw Error(

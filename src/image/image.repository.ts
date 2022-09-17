@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, StreamableFile } from '@nestjs/common'
 import { Image } from '@src/entity/image.entity'
 import { ImageFilterRequest } from '@src/type/image-filter-request.type'
-import { createWriteStream } from 'fs'
+import { createReadStream, createWriteStream } from 'fs'
 import { DataSource } from 'typeorm'
 
 @Injectable()
@@ -69,6 +69,12 @@ export class ImageRepository {
         )
         ws.write(file.buffer)
         console.log(file)
+    }
+
+    async retrieve(filename: string) {
+        const path = `${__dirname}/../../public/${filename}`
+        const imageFile = createReadStream(path)
+        return new StreamableFile(imageFile)
     }
 
     async update(imageId: number, requestImage: Image) {

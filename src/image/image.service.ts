@@ -11,10 +11,10 @@ export class ImageService {
         return this.imageRepository.findOne(imageId)
     }
 
-    async getImageFilePath(imageId: number) {
-        const image = await this.imageRepository.findOne(imageId)
+    async getImageStreamableFile(imageId: number) {
+        const imageModel = await this.imageRepository.findOne(imageId)
 
-        return `${__dirname}/../../public/${image.filename}`
+        return this.imageRepository.retrieve(imageModel.filename)
     }
 
     async createImage(file: Express.Multer.File) {
