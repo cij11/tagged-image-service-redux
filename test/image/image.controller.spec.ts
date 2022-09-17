@@ -78,6 +78,39 @@ describe('ImageController.findOne', () => {
     })
 })
 
+describe('ImageController.search', () => {
+    const expectedImage: Image = {
+        id: 1,
+        filename: 'test.jpg',
+        createdAt: new Date(),
+        modifiedAt: new Date(),
+        tags: []
+    }
+
+    it('should call ImageService filterImages with filter query params', async () => {
+        // Given
+        const imageService = sinon.createStubInstance(ImageService)
+        const filterQueryParams: Record<string, any> = {
+            filter: {
+                tagIds: [1]
+            }
+        }
+        imageService.filterImages.resolves([expectedImage])
+
+        const sut = new ImageController(imageService)
+
+        // When
+        const actualImages = await sut.search(filterQueryParams)
+
+        // Then
+        expect(actualImages).toContain(expectedImage)
+        expect(actualImages).toHaveLength(1)
+        expect(
+            imageService.filterImages.calledOnceWithExactly(filterQueryParams)
+        ).toBeTruthy()
+    })
+})
+
 describe('ImageController.create', () => {
     const expectedImageModel: Image = {
         id: 1,

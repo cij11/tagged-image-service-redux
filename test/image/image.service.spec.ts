@@ -62,6 +62,39 @@ describe('TagService.getImageStreamableFile', () => {
     })
 })
 
+describe('ImageService.filterImages', () => {
+    const expectedImageModel: Image = {
+        id: 1,
+        filename: 'test.jpg',
+        createdAt: new Date(),
+        modifiedAt: new Date(),
+        tags: []
+    }
+
+    it('should search with provided filter query params in ImageRepository', async () => {
+        // Given
+        const imageRepository = sinon.createStubInstance(ImageRepository)
+        const filterQueryParams: Record<string, any> = {
+            filter: {
+                tagIds: [1]
+            }
+        }
+        imageRepository.search.resolves([expectedImageModel])
+
+        const sut = new ImageService(imageRepository)
+
+        // When
+        const actualImages = await sut.filterImages(filterQueryParams)
+
+        // Then
+        expect(actualImages).toContain(expectedImageModel)
+        expect(actualImages).toHaveLength(1)
+        expect(
+            imageRepository.search.calledOnceWithExactly(filterQueryParams)
+        ).toBeTruthy()
+    })
+})
+
 describe('TagService.updateImage', () => {
     const expectedImageModel: Image = {
         id: 1,
