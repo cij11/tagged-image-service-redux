@@ -30,11 +30,6 @@ describe('LocalStrategy.validate', () => {
         const username = 'chris.jolly'
         const password = 'Password123!'
 
-        const authenticatedUser: AuthenticatedUser = {
-            userId: 1,
-            username
-        }
-
         const authService = sinon.createStubInstance(AuthService)
         authService.validateUser.resolves(null)
 

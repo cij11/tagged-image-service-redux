@@ -6,13 +6,13 @@ import { DataSource } from 'typeorm'
 export class TagRepository {
     constructor(private dataSource: DataSource) {}
 
-    async getTags() {
+    async findAll() {
         const repo = this.dataSource.getRepository(Tag)
 
         return repo.find()
     }
 
-    async createTag(requestTag: Tag) {
+    async create(requestTag: Tag) {
         const repo = this.dataSource.getRepository(Tag)
 
         const createdTag = repo.create(requestTag)

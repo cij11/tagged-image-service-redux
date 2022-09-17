@@ -24,3 +24,25 @@ describe('TagController.findAll', () => {
         expect(tags).toHaveLength(1)
     })
 })
+
+describe('TagController.create', () => {
+    const tag: Tag = {
+        id: 1,
+        text: 'test_text'
+    }
+
+    it('should create tag via TagService', async () => {
+        // Given
+        const tagService = sinon.createStubInstance(TagService)
+        tagService.create.resolves(tag)
+
+        const sut = new TagController(tagService)
+
+        // When
+        const createdTag = await sut.create(tag)
+
+        // Then
+        expect(createdTag).toBe(tag)
+        expect(tagService.create.calledOnceWithExactly(tag)).toBeTruthy()
+    })
+})

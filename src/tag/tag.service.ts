@@ -7,10 +7,10 @@ export class TagService {
     constructor(private tagRepository: TagRepository) {}
 
     findAll(): Promise<Tag[]> {
-        return this.tagRepository.getTags()
+        return this.tagRepository.findAll()
     }
 
     async create(tag: Tag) {
-        return this.tagRepository.createTag(tag)
+        return this.tagRepository.create(tag)
     }
 }
