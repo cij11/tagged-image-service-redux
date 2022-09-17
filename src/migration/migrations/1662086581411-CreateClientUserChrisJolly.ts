@@ -15,7 +15,7 @@ export class CreateClientUserChrisJolly1662086581411
         await queryRunner.query(
             `INSERT INTO user
       (id, username, password_bcrypt)
-       values (default, "${clientUsername}", "${hash}") `
+       values (default, "${clientUsername}", "${hash}")`
         )
     }
 

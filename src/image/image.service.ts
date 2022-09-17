@@ -20,7 +20,7 @@ export class ImageService {
     async createImage(file: Express.Multer.File) {
         const filename = file.originalname
 
-        this.imageRepository.store(file) // TODO: Implement
+        this.imageRepository.store(file)
 
         const image: Image = {
             filename: filename,
