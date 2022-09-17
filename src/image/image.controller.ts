@@ -6,6 +6,7 @@ import {
     Param,
     Patch,
     Post,
+    Query,
     StreamableFile,
     UploadedFile,
     UseGuards,
@@ -16,6 +17,7 @@ import { JwtAuthGuard } from '@src/auth/jwt-auth.guard'
 import { Image } from '@src/entity/image.entity'
 import { ImageService } from '@src/image/image.service'
 import { AuditInterceptor } from '@src/logging/audit.interceptor'
+import { ImageFilterRequest } from '@src/type/image-filter-request.type'
 import { MimeType } from '@src/type/mime-type.type'
 
 @Controller('images')
@@ -57,8 +59,8 @@ export class ImageController {
 
     @Get()
     @UseGuards(JwtAuthGuard)
-    search(): Promise<Image[]> {
-        return this.imageService.filterImages(null)
+    search(@Query('filter') filter: ImageFilterRequest): Promise<Image[]> {
+        return this.imageService.filterImages(filter)
     }
 
     @Post()
