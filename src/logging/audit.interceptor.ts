@@ -21,6 +21,10 @@ export class AuditInterceptor implements NestInterceptor {
                 const { user, body, method, url } = request
                 const { userId, username } = user
 
+                if (request.file) {
+                    body.filename = request.file.originalname
+                }
+
                 const audit = {
                     statusCode,
                     userId,

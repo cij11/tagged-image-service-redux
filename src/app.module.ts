@@ -13,6 +13,7 @@ import { User } from '@src/entity/user.entity'
 import { migrationDataSource } from '@src/migration/migration-data-source'
 import { TagModule } from '@src/tag/tag.module'
 import { UserModule } from '@src/user/user.module'
+import { ImageModule } from './image/image.module'
 
 console.log(
     `Including migrationDataSource into build: ${!!migrationDataSource}`
@@ -22,6 +23,7 @@ console.log(
     imports: [
         ConfigModule.forRoot(),
         TagModule,
+        ImageModule,
         TypeOrmModule.forRootAsync({
             // Need to instantiate TypeOrmModule asynchronously to await env variable loading
             imports: [ConfigModule],
