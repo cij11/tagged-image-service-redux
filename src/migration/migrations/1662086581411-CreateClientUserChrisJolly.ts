@@ -15,7 +15,7 @@ export class CreateClientUserChrisJolly1662086581411
         await queryRunner.query(
             `INSERT INTO user
       (id, username, password_bcrypt)
-       values (default, "${clientUsername}", "${hash}")`
+       values (default, "${clientUsername}", "$2b$10$BVGXVvjSgqHxUVbMPEGoCemMg8nFsjf.IxXpCrQdPEf2gmzu.zugW")` // TODO: Fix bug where interpolating hash variable here results in hash not being written to db
         )
     }
 

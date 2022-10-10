@@ -6,6 +6,7 @@ import {
     UseGuards,
     UseInterceptors
 } from '@nestjs/common'
+import { AppService } from '@src/app.service'
 import { AuthService } from '@src/auth/auth.service'
 import { JwtAuthGuard } from '@src/auth/jwt-auth.guard'
 import { LocalAuthGuard } from '@src/auth/local-auth.guard'
@@ -13,7 +14,7 @@ import { AuditInterceptor } from './logging/audit.interceptor'
 
 @Controller()
 export class AppController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private appService: AppService) {}
 
     @UseGuards(LocalAuthGuard)
     @Post('auth/login')
@@ -29,6 +30,11 @@ export class AppController {
     getProfile(@Request() req: any) {
         // TODO - Fix explicit any
         return req.user // user comes from jwt strategy validate()
+    }
+
+    @Get('ping')
+    async ping() {
+        return this.appService.getPong()
     }
 }
 
